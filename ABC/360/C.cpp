@@ -1,43 +1,34 @@
 #include <iostream>
-#include <string>
 #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
-
-
 
 int main() {
     int n;
     cin >> n;
 
     vector<int> a(n);
-    
-    
+    vector<int> w(n);
+    vector<int> Max(n);
 
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-     vector<int> w(n);
-
-    for(int i = 0; i < n; i++){
-      cin >> w[i];  
+    for (int i = 0; i < n; i++) {
+        cin >> w[i];
     }
 
-    int sum = 0;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            if(a[i] == a[j] && w[i] < w[j]){
-                sum += w[i];
-            }else{
-                sum += w[j];
-            }
-        }
+   
+
+    for (int i = 0; i < n; i++) {
+       a[i]--;
+       Max[a[i]] = max(Max[a[i]], w[i]);
     }
 
-    cout << sum << endl;
+    const int sum_w=accumulate(w.begin(),w.end(),0);
+    const int sum_max=accumulate(Max.begin(),Max.end(),0);
+
+    cout << sum_w-sum_max << endl;
     return 0;
-
-
-
-
 }
